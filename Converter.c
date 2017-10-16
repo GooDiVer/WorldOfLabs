@@ -1,6 +1,6 @@
 #include <stdio.h>
 
- main() {
+int main() {
 	int a;
 	char c;
 	char t;
@@ -40,6 +40,6 @@
 		
 	}
 	
-	
+	return 0
 	
  }
