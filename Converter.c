@@ -1,6 +1,6 @@
 #include <stdio.h>
 
- main() {
+ int main() {
 	int a;
 	char c;
 	char t;
@@ -39,7 +39,5 @@
 		printf("%.2f F \n", 1.8*(a - 273.15) + 32);
 		
 	}
-	
-	
-	
+	return 0;
  }
