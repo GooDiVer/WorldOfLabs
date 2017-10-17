@@ -1,31 +1,33 @@
 #include <stdio.h>
+#include <stdlib.h> 
 
-int main() {
-	int a;
-	char c;
-	char t;
+int main(int argc, char *argv[]) 
+{
 	
-	scanf("%d", &a);
-	c = getchar();
-	while (c != '\n') {
-		t = c;
-		c = getchar();
-	}
-		
-	if (t == 'C') {
-		printf("%.2f F\n",1.8*a + 32);
-		printf("%.2f K", a + 273.15);
-	}
-	else if (t == 'K') {
-		printf("%.2f C \n", a - 273.15);
-		printf("%.2f F \n", 1.8*(a - 273.15) + 32);
-	}
-	else if (t == 'F') {
-		printf("%.2f C \n", (a - 32)/1.8);
-		printf("%.2f K \n", (a - 32)/1.8 + 273.15);
-	}
+	int a = atof(argv[1]);
 	
-	else {
+	/*If we passed specific temperature (2 arg)*/
+	if (argc > 2) 
+	{
+		if (*argv[2] == 'C' || *argv[2] == 'c') 
+		{
+			printf("%.2f F\n",1.8*a + 32);
+			printf("%.2f K", a + 273.15);
+		}
+		else if (*argv[2] == 'K' || *argv[2] == 'k') 
+		{
+			printf("%.2f C \n", a - 273.15);
+			printf("%.2f F \n", 1.8*(a - 273.15) + 32);
+		}
+		else if (*argv[2] == 'F' || *argv[2] == 'f') 
+		{
+			printf("%.2f C \n", (a - 32)/1.8);
+			printf("%.2f K \n", (a - 32)/1.8 + 273.15);
+		}
+	}
+	/*if we passed only figures (1 arg)*/
+	else if (argc = 2) 
+	{
 		printf("%d C: \n",a);
 		printf("%.2f F\n",1.8*a + 32);
 		printf("%.2f K\n\n", a + 273.15);
@@ -40,6 +42,6 @@ int main() {
 		
 	}
 	
-	return 0
+	return 0;
 	
  }
