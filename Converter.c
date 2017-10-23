@@ -19,7 +19,7 @@ int main(int argc, char *argv[])
 			printf("%.2f C \n", a - 273.15);
 			printf("%.2f F \n", 1.8*(a - 273.15) + 32);
 		}
-		else if ((*argv[2] == 'F' || *argv[2] == 'f') && (a > -459,67))
+		else if ((*argv[2] == 'F' || *argv[2] == 'f') && (a > -459.67))
 		{
 			printf("%.2f C \n", (a - 32)/1.8);
 			printf("%.2f K \n", (a - 32)/1.8 + 273.15);
