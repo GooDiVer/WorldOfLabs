@@ -26,7 +26,7 @@ int main(int argc, char *argv[])
 		}
 	}
 	/*if we passed only figures (1 arg)*/
-	else if (argc = 2) 
+	else if (argc == 2) 
 	{
 		printf("%d C: \n",a);
 		printf("%.2f F\n",1.8*a + 32);
