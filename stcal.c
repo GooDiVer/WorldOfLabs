@@ -31,7 +31,7 @@ int main()
 	s = malloc(100*sizeof(char));
 	/*in case of NOT NUMBERS we return "c" which may contain + or - or * or / */
 	char c;
-	//by the 'naoborot' we can trick subtraction or division
+	/*by the 'naoborot' we can trick subtraction or division*/
 	int naoborot;
 
 	while((c = userInput(s)) != EOF) 
