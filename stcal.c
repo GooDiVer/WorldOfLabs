@@ -57,8 +57,6 @@ int main(int argc, char* argv[])
 				naoborot = pop(p);
 				push(p,pop(p)/naoborot);
 				break;
-		//	case '\n':
-			//	printf("%d", peek(p));
 		}
 		count++;
 	}
