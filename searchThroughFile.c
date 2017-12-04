@@ -29,6 +29,7 @@ wordTree* getWordTree(char* c) {
 	wordTree* tmp = (wordTree*)malloc(sizeof(wordTree));
 	tmp->nextWord = NULL;
 	tmp->s = c;
+	return tmp;
 }
 
 /*--------------------FITCHA--------------------*/
@@ -58,7 +59,7 @@ void insertWord(wordTree **slovo, char* word, int line, int sym) {
 		if((*slovo)->nextWord) {
 			putWordBetween(slovo,word, line, sym);
 		}
-		else if (protectFromRecursion = 0)
+		else if (protectFromRecursion == 0)
 			insertWord(&((*slovo)->nextWord),word, line, sym);
 	}
 }
@@ -79,7 +80,7 @@ void insertTree(letterTree** head, char* word, int line, int sym){
 }
 
 /*--------------------SERACHERS FOR WORD--------------------*/
-char* searchWord(wordTree* slovo, char* word) {
+void searchWord(wordTree* slovo, char* word) {
 	
 	if (!strcmp(slovo->s, word)) {
 		printf("%d : %d %s \n",slovo->l,slovo->sy,slovo->s);
@@ -93,7 +94,7 @@ char* searchWord(wordTree* slovo, char* word) {
 		printf("Word wasn't found");
 }
 
-char* searchIt(letterTree* head, char* word) {
+void searchIt(letterTree* head, char* word) {
 	if(head->letter == word[0]) {
 		searchWord(head->slovo, word);
 		
@@ -175,11 +176,9 @@ int main(int argc, char** argv) {
 		insertTree(&head,string,line,sym);
 	
 	/*  C:/file/test.txt */
-	int length = strlen(argv[2]);
+	unsigned long length = strlen(argv[2]);
 	char posim[length];
-	
-	printf("%d\n",length);
-	printf("%d\n",strlen(posim));
+
 	
 	if(head->slovo && !head->slovo->nextWord && !head->nextLetter) {
 		freopen(argv[1],"r",fp);
@@ -193,7 +192,7 @@ int main(int argc, char** argv) {
 			}
 		posim[counter] = '\0';
 		if(!strcmp(argv[2],posim)) {
-			gotWord == 1;
+			gotWord = 1;
 			printf("%d %s \n",symCounter,posim);
 		}
 		while((c = fgetc(fp)) != EOF) {
@@ -213,4 +212,5 @@ int main(int argc, char** argv) {
 	}
 	else
 		searchIt(head,argv[2]);
+	return 1;
 }
