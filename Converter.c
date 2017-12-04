@@ -28,7 +28,7 @@ int main(int argc, char *argv[])
             printf("You input incorrect data");
 	}
 	/*if we passed only figures (1 arg)*/
-	else if (argc == 2)
+	else if (argc == 2 && a >= 0)
 	{
 		printf("%d C: \n",a);
 		printf("%.2f F\n",1.8*a + 32);
@@ -42,6 +42,9 @@ int main(int argc, char *argv[])
 		printf("%.2f C \n", a - 273.15);
 		printf("%.2f F \n", 1.8*(a - 273.15) + 32);
 
+	}
+	else {
+		printf("It's incorrent temperature");
 	}
 
 	return 0;
