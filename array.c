@@ -108,8 +108,6 @@ int main() {
 	}
 	
 	/*freeing memory*/
-	for( i = 0; i < n; i++) 
-		free(arr[i]);
 	free(arr);
 
     printf("\n");
@@ -132,7 +130,7 @@ int main() {
 	int **a;
 
 	a = (int**)malloc(1000 * sizeof(int*));
-	a[msize] = (int*)malloc(1000 * sizeof(int*));
+	a[msize] = (int*)malloc(1000 * sizeof(int));
 
 	printf("Enter array B manually (\" \" - end of element, \"%c\" - end of a line, \"%c\" - end of an array input):\n", ',','.');
 	while ((c = getchar()) != '.' && c != EOF) 
