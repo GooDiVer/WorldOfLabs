@@ -133,6 +133,7 @@ int main(int argc, char** argv) {
 	
 	
 	int sym = 0;
+	int flag = 0;
 	int posAll = 0;
 	int line = 1;
 	char *string = "";
@@ -166,6 +167,7 @@ int main(int argc, char** argv) {
 			/*если было слово, вводим, иначе был пробел, который нигде не нужен*/
 			if (inWord == 1) {
 				insertTree(&head,string,line,sym);
+				flag = 1;
 			}
 			inWord = 0;
 			string = "";
@@ -180,7 +182,7 @@ int main(int argc, char** argv) {
 	char posim[length];
 
 	
-	if(head->slovo && !head->slovo->nextWord && !head->nextLetter) {
+	if(!flag) {
 		freopen(argv[1],"r",fp);
 		int symCounter = 1;
 		int counter = 0;
