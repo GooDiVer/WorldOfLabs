@@ -130,7 +130,8 @@ char* concat(char *s1, char *s2) {
 
 int main(int argc, char** argv) {
 	
-	
+	if(argc < 3)
+		return 1;
 	
 	int sym = 0;
 	int flag = 0;
