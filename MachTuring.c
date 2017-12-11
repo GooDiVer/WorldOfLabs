@@ -9,6 +9,7 @@ typedef struct T {
 } Cell;
 
 int tFunction(Cell* cell,char* state) {
+
 		if(!strcmp(state,"movl")) {
 			if(cell->c > 0)
 				cell->c--;
@@ -24,7 +25,7 @@ int tFunction(Cell* cell,char* state) {
 			cell->c++;
 			
 		}
-		if(!strcmp(state,"incr")) {
+		if(!strcmp(state,"inc")) {
 			if(cell->lenta[cell->c] == 255) {
 				cell->lenta[cell->c] = 0;
 				return 1;
@@ -47,7 +48,13 @@ int tFunction(Cell* cell,char* state) {
 			putchar('\n');
 		}
 		if(!strcmp(state,"get")) {
-			cell->lenta[cell->c] = getchar();
+			scanf("%d",(&(cell->lenta[cell->c])));
+			if(cell->lenta[cell->c] > 255) 
+			{
+				cell->lenta[cell->c] = 0;
+				return 1;
+			}
+			
 		}
 		return 0;
 		
@@ -57,28 +64,44 @@ void mainTFunc(Cell* cell, FILE* fp)
 {
 	char state[100];
 	int outError;
+	int loop_start;
+
 	
 	while (fscanf(fp,"%s",state) != EOF) 
 	{
-		outError = tFunction(cell,state);;
-		
-		if(!strcmp(state,"begin")) 
+		char spam[255];
+		if(state[0] == '*') 
 		{
-			fscanf(fp,"%s",state);
-			while(cell->lenta[cell->c] != 0) 
+			fgets(spam,255,fp);
+		}
+		outError = tFunction(cell,state);
+		
+		if(!strcmp(state,"begin"))
+		{
+			loop_start = ftell(fp);
+			while(fscanf(fp,"%s",state) != EOF) 
 			{
+				if(!strcmp(state,"end") && cell->lenta[cell->c] == 0)
+					break;
+				else if(!strcmp(state,"end")) 
+				{
+					fseek(fp,loop_start,SEEK_SET);
+					continue;
+				}
+				
 				if(cell->lenta[cell->c] == 0) 
 				{
-					while(!strcmp(state,"end")) 
+					do 
+					{
 						fscanf(fp,"%s",state);
+					} while(strcmp(state,"end"));
 					break;
 				}
-				else {
-					while(outError != 1)
-						outError = tFunction(cell,state);
-				}
+				else
+					outError = tFunction(cell,state);
 			}
 		}
+
 		if(outError == 1)
 			printf("Error occurred \n");
 	}
