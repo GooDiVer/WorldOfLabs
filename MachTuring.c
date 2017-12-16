@@ -14,7 +14,7 @@ int tFunction(Cell* cell,char* state) {
 			if(cell->c > 0)
 				cell->c--;
 			else
-				return 1;
+				return 2;
 		}
 		if(!strcmp(state,"movr")) {
 			if(cell->c >= cell->maxC) {
@@ -60,8 +60,9 @@ int tFunction(Cell* cell,char* state) {
 		
 }
 
-void mainTFunc(Cell* cell, FILE* fp) 
+int mainTFunc(Cell* cell, FILE* fp) 
 {
+	
 	char state[100];
 	int outError;
 	int loop_start;
@@ -79,7 +80,7 @@ void mainTFunc(Cell* cell, FILE* fp)
 		if(!strcmp(state,"begin"))
 		{
 			loop_start = ftell(fp);
-			while(fscanf(fp,"%s",state) != EOF) 
+			while(fscanf(fp,"%s",state) != EOF && outError != 2) 
 			{
 				if(!strcmp(state,"end") && cell->lenta[cell->c] == 0)
 					break;
@@ -102,21 +103,33 @@ void mainTFunc(Cell* cell, FILE* fp)
 			}
 		}
 
-		if(outError == 1)
-			printf("Error occurred \n");
+		if(outError == 1) 
+			printf("Error occured");
+		
+		if(outError == 2) 
+			return 1;
+		
 	}
+	return 0;
 }
 
 
 int main(int argc, char** argv) {
 	
 	Cell out_Alphabet = {.c = 0, .maxC = 254, .lenta = (int*)malloc(255*sizeof(int))};
+	int lentaError;
 	int i;
 	for(i = 0; i < 255; i++) {
 		out_Alphabet.lenta[i] = 0;
 	}
 	
 	FILE *in_Alphabet = fopen(argv[1], "r");
-	mainTFunc(&out_Alphabet,in_Alphabet);
+	lentaError = mainTFunc(&out_Alphabet,in_Alphabet);
+	
+	if(lentaError == 1) {
+		printf("Uncorrect action with tape");
+		return 1;
+	}
+	
 	return 0;
 }
