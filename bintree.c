@@ -34,8 +34,10 @@ void addNodeByParent(int x, Node *parent,int *level)
 		parent->left = root;
 		*level = *level + 1;
 	}
-	else
+	else if (!parent->right)
 		parent->right = root;
+	else
+		printf("You can't add more that 2 nodes in a BINtree!\n");
     
 }
 
@@ -125,9 +127,14 @@ int main() {
 	printf("The number of internal nodes: %d\n",innerNodes);
 	printf("The Number of leaves: %d\n\n",nodesCounter - innerNodes);
 	printf("What would you like to do now?:\n>exit\n>show (bintree)\n");
+	scanf("%s",command);
+	while(strcmp(command,"exit")) {
+		if(!strcmp(command,"show"))
+			printTree(root);
+		printf("\n");
+		scanf("%s",command);
+	}
 
-
-	printTree(root);
 	return 0;
 }
 /*>>END OF MAIN METHOD<<*/
