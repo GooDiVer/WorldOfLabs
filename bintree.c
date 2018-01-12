@@ -52,8 +52,10 @@ void addNodeBySibling(int x,Node *sibling)
 	root->left = root->right = NULL;
 	if (!parent->left)
 		parent->left = root;
-	else
+	else if(!parent->right)
 		parent->right = root;
+	else
+		printf("You can't add more that 2 nodes in a BINtree!\n");
     
 }
 
